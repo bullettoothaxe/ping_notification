@@ -17,7 +17,6 @@ def main():
     last_status = False
     while True:
         current_status = is_online()
-        print(current_status)
         if current_status != last_status:
             send_notification(current_status)
             last_status = current_status
