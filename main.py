@@ -6,9 +6,10 @@ import time
 def send_notification(status: bool):
     message = 'Light!' if status else 'No Light'
     updates = bot.get_updates()
+    chat_ids = list(set([update.message.chat.id for update in updates]))
+    print(chat_ids)
 
-    for update in updates:
-        chat_id = update.message.chat.id
+    for chat_id in chat_ids:
         bot.send_message(chat_id, message)
 
 
