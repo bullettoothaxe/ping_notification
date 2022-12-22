@@ -1,4 +1,4 @@
-from ping import is_online
+from ping import is_host_up
 from bot import bot
 import time
 
@@ -16,7 +16,7 @@ def send_notification(status: bool):
 def main():
     last_status = False
     while True:
-        current_status = is_online()
+        current_status = is_host_up()
         if current_status != last_status:
             send_notification(current_status)
             last_status = current_status
