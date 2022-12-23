@@ -4,7 +4,7 @@ import os
 
 
 def is_host_up():
-    command = f'nmap -p {PORT} {IP_ADDRESS} -Pn | grep open'
+    command = f"nmap -p {PORT} {IP_ADDRESS} -Pn | grep -E -i -w 'open|closed'"
     stream = os.popen(command)
     output = stream.read()
     return bool(output)
