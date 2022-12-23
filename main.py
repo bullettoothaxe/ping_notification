@@ -2,9 +2,12 @@ from ping import is_host_up
 from bot import bot
 import time
 
+has_light_message = "💡😺💡"
+no_light_message = "🕯️🙅‍♀️🕯️"
+
 
 def send_notification(status: bool):
-    message = 'Light!' if status else 'No Light'
+    message = has_light_message if status else no_light_message
     updates = bot.get_updates()
     chat_ids = list(set([update.message.chat.id for update in updates]))
     print(chat_ids)
