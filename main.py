@@ -25,12 +25,21 @@ def get_subscribers(from_updates):
 def send_notification(status: bool):
     message = has_light_message if status else no_light_message
     updates = bot.get_updates()
-    from_updates = uniq([update.message.chat.id for update in updates])
+
+    from_updates = []
+
+    for update in updates:
+        if update.message is not None:
+            from_updates.append(update.message.chat.id)
+
     chat_ids = get_subscribers(from_updates)
     print(chat_ids)
 
     for chat_id in chat_ids:
-        bot.send_message(chat_id, message)
+        try:
+            bot.send_message(chat_id, message)
+        except:
+            users.remove(chat_id)
 
 
 def main():
