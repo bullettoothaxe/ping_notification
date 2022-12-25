@@ -1,11 +1,10 @@
 from ping import is_host_up
 from bot import bot
+import users
 import time
 
 has_light_message = "💡😺💡"
 no_light_message = "🕯️🙅‍♀️🕯️"
-
-users = []
 
 
 def uniq(items):
@@ -13,13 +12,17 @@ def uniq(items):
 
 
 def get_subscribers(from_updates):
-    global users
+    saved_users = users.read()
+    next_users = saved_users.copy()
 
     for user in from_updates:
-        if user not in users:
-            users.append(user)
+        if user not in next_users:
+            next_users.append(user)
 
-    return users
+    if len(saved_users) != len(next_users):
+        users.update(next_users)
+
+    return next_users
 
 
 def send_notification(status: bool):
@@ -39,7 +42,8 @@ def send_notification(status: bool):
         try:
             bot.send_message(chat_id, message)
         except:
-            users.remove(chat_id)
+            next_users = chat_ids.copy().remove(chat_id)
+            users.update(next_users)
 
 
 def main():
