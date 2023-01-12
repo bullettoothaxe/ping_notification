@@ -42,12 +42,13 @@ def send_notification(status: bool):
         try:
             bot.send_message(chat_id, message)
         except:
-            next_users = chat_ids.copy().remove(chat_id)
+            next_users = chat_ids.copy()
+            next_users.remove(chat_id)
             users.update(next_users)
 
 
 def main():
-    last_status = False
+    last_status = True
     while True:
         current_status = is_host_up()
         if current_status != last_status:
