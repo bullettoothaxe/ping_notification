@@ -14,3 +14,13 @@ def read() -> list[User]:
 def update(next_users: list[User]):
     with open(FILE_NAME, "w") as file:
         json.dump(next_users, file)
+
+
+def add_user(user_id):
+    next_users = read().copy()
+    next_users.append(user_id)
+    update(uniq(next_users))
+
+
+def uniq(items):
+    return list(set(items))

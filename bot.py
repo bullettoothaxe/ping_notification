@@ -11,3 +11,9 @@ def schedule_handler(message):
     active_users = users.read()
     message = f"Users count: {len(active_users)}"
     bot.send_message(chat_id, message)
+
+
+@bot.message_handler(commands=['start'])
+def schedule_handler(message):
+    chat_id = message.chat.id
+    users.add_user(chat_id)
