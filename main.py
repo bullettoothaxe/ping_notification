@@ -1,7 +1,7 @@
 from ping import is_host_up
 from bot import bot
 import users
-import time
+import asyncio
 
 has_light_message = "💡😺💡"
 no_light_message = "🕯️🙅‍♀️🕯️"
@@ -47,15 +47,15 @@ def send_notification(status: bool):
             users.update(next_users)
 
 
-def main():
+async def main():
     last_status = True
     while True:
         current_status = is_host_up()
         if current_status != last_status:
             send_notification(current_status)
             last_status = current_status
-        time.sleep(30)
+        await asyncio.sleep(30)
 
 
 if __name__ == '__main__':
-    main()
+    asyncio.run(main())
