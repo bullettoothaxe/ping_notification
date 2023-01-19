@@ -6,7 +6,7 @@ bot = telebot.TeleBot(BOT_TOKEN)
 
 
 @bot.message_handler(commands=['users_anal'])
-def schedule_handler(message):
+def users_anal_handler(message):
     chat_id = message.chat.id
     active_users = users.read()
     message = f"Users count: {len(active_users)}"
@@ -14,6 +14,6 @@ def schedule_handler(message):
 
 
 @bot.message_handler(commands=['start'])
-def schedule_handler(message):
+def start_handler(message):
     chat_id = message.chat.id
     users.add_user(chat_id)
