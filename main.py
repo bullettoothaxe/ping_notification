@@ -61,7 +61,7 @@ async def main():
 async def run():
     loop = asyncio.get_event_loop()
     loop.create_task(main())
-    bot.infinity_polling()
+    bot.polling()
 
 
 if __name__ == '__main__':
