@@ -59,8 +59,10 @@ async def main():
 
 
 async def run():
-    await asyncio.gather(bot.infinity_polling(), main())
+    loop = asyncio.get_event_loop()
+    loop.create_task(main())
+    bot.infinity_polling()
 
 
 if __name__ == '__main__':
-    asyncio.run(main())
+    asyncio.run(run())
