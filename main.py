@@ -58,5 +58,5 @@ async def main():
 
 
 if __name__ == '__main__':
-    bot.infinity_polling()
     asyncio.run(main())
+    bot.infinity_polling()
