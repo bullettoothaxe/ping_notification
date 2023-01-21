@@ -58,6 +58,5 @@ async def main():
 
 
 if __name__ == '__main__':
-    # bot.infinity_polling()
-    # print('Started')
+    print('Started')
     asyncio.run(main())
