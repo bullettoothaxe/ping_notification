@@ -48,6 +48,7 @@ def send_notification(status: bool):
 
 
 async def main():
+    print('Started')
     last_status = True
     while True:
         current_status = is_host_up()
@@ -62,5 +63,4 @@ async def run():
 
 
 if __name__ == '__main__':
-    print('Started')
     asyncio.run(run())
