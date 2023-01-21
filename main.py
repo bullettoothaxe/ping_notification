@@ -48,6 +48,18 @@ def send_notification(status: bool):
 
 
 async def main():
+    @bot.message_handler(commands=['start'])
+    def start_handler(message):
+        chat_id = message.chat.id
+        users.add_user(chat_id)
+
+    @bot.message_handler(commands=['users_anal'])
+    def users_anal_handler(message):
+        chat_id = message.chat.id
+        active_users = users.read()
+        message = f"Users count: {len(active_users)}"
+        bot.send_message(chat_id, message)
+
     last_status = True
     while True:
         current_status = is_host_up()
@@ -58,8 +70,8 @@ async def main():
 
 
 if __name__ == '__main__':
-    loop = asyncio.get_event_loop()
-    asyncio.ensure_future(main())
-    loop.run_forever()
-    # loop.run_until_complete(main())
-    # asyncio.run(main())
+    # loop = asyncio.get_event_loop()
+    # asyncio.ensure_future(main())
+    # loop.run_forever()
+    # # loop.run_until_complete(main())
+    asyncio.run(main())
