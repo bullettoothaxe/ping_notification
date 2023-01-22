@@ -12,14 +12,21 @@ def read() -> list[User]:
 
 
 def update(next_users: list[User]):
+    uniq_next_users = uniq(next_users)
     with open(FILE_NAME, "w") as file:
-        json.dump(next_users, file)
+        json.dump(uniq_next_users, file)
 
 
 def add_user(user_id):
     next_users = read().copy()
     next_users.append(user_id)
-    update(uniq(next_users))
+    update(next_users)
+
+
+def remove_user(user_id):
+    next_users = read().copy()
+    next_users.remove(user_id)
+    update(next_users)
 
 
 def uniq(items):

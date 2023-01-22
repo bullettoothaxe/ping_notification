@@ -2,3 +2,4 @@ ping3
 requests
 pyTelegramBotAPI
 python-nmap
+aiohttp
