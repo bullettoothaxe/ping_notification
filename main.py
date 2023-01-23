@@ -1,38 +1,17 @@
-from ping import is_host_up
 from bot import bot
-import users
 import asyncio
-
-has_light_message = "💡😺💡"
-no_light_message = "🕯️🙅‍♀️🕯️"
-
-
-async def send_notification(status: bool):
-    message = has_light_message if status else no_light_message
-    chat_ids = users.read().copy()
-    print(chat_ids)
-
-    for chat_id in chat_ids:
-        try:
-            await bot.send_message(chat_id, message)
-        except:
-            users.remove_user(chat_id)
+from support import run_support_scheduler
+from notification import connectivity_notification_loop
 
 
 async def main():
-    print('Started')
-    last_status = True
-    while True:
-        current_status = is_host_up()
-        if current_status != last_status:
-            await send_notification(current_status)
-            last_status = current_status
-        await asyncio.sleep(30)
-
-
-async def run():
-    await asyncio.gather(main(), bot.infinity_polling())
+    tasks = [
+        connectivity_notification_loop(),
+        bot.infinity_polling(),
+        run_support_scheduler(),
+    ]
+    await asyncio.gather(*tasks)
 
 
 if __name__ == '__main__':
-    asyncio.run(run())
+    asyncio.run(main())
