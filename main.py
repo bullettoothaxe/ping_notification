@@ -8,7 +8,7 @@ async def main():
     tasks = [
         connectivity_notification_loop(),
         bot.infinity_polling(),
-        run_support_scheduler(),
+        # run_support_scheduler(),
     ]
     await asyncio.gather(*tasks)
 
